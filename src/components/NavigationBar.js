@@ -21,24 +21,42 @@ function NavigationBar({ updateTimeframe, timeFrame }) {
 
   async function searchCoins() {
     try {
+      console.log("searchInput:: ", searchInput);
+      setSearching(true);
+      updateInfoLoaded(false);
+      updateResults([]);
       const coinList = await MockDexScreenerAPI.search(searchInput);
       console.log("🚀 ~ getTokens ~ coinList:", coinList);
+      for (let item of coinList) {
+        item.priceChangeDisplay = item.priceChange[timeFrame];
+        item.txnsDisplay = item.txns[timeFrame];
+        item.volumeDisplay = item.volume[timeFrame];
+        item.priceDisplay = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(item.priceUsd);
+        console.log("priceChangeDisplay:: ", item.priceChangeDisplay);
+      }
       updateResults(coinList);
       updateInfoLoaded(true);
+      setSearching(false);
     } catch (err) {
       console.error("App loadUserInfo: problem loading", err);
       updateResults([]);
       updateInfoLoaded(true);
+      setSearching(false);
     }
   }
 
   return (
     <Navbar className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand>
-          <img style={{ width: "45px" }} src="dex_screener_logo.png" />
-          Mock DexScreener{" "}
-        </Navbar.Brand>
+        <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Navbar.Brand>
+            <img style={{ width: "45px" }} src="dex_screener_logo.png" />
+            Mock DexScreener{" "}
+          </Navbar.Brand>
+        </a>
 
         <Navbar id="basic-navbar-nav">
           <Nav className="justify-content-end">
@@ -46,18 +64,19 @@ function NavigationBar({ updateTimeframe, timeFrame }) {
               <Form.Control
                 id="searchBar"
                 aria-describedby="searchBar"
-                handleChange={handleChange}
+                onChange={handleChange}
               />
               <Button
                 variant="primary"
-                type="button"
-                disabled={searching}
+                type="submit"
+                disabled={searching || !searchInput}
                 onClick={searchCoins}
                 style={{
-                  backgroundColor: "black",
+                  backgroundColor: "#1d1d22",
                   color: "white",
-                  border: "black",
+                  border: "#1d1d22",
                   marginLeft: "10px",
+                  marginRight: "10px",
                 }}
               >
                 {searching ? "Searching..." : "Search"}
@@ -65,6 +84,7 @@ function NavigationBar({ updateTimeframe, timeFrame }) {
               <Form.Select
                 value={timeFrame}
                 onChange={(e) => updateTimeframe(e.target.value)}
+                style={{ width: "90px" }}
               >
                 <option value="m5">5M</option>
                 <option value="h1">1H</option>

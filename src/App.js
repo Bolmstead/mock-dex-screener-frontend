@@ -25,11 +25,20 @@ function App() {
   const solAddress = "0x570A5D26f7765Ecb712C0924E4De545B89fD43dF";
   const ethAddress = "0x2170Ed0880ac9A755fd29B2688956BD959F933F8";
 
+  const timeFramesObj = {
+    m5: "5M",
+    h1: "1H",
+    h6: "6H",
+    h24: "24H",
+  };
+
   useEffect(
     // Grab the userinfo with API call using token in local storage and save user to state
     function loadCoins() {
       async function getTokens() {
         try {
+          setInfoLoaded(false);
+
           let coinList = await MockDexScreenerAPI.getTokens(
             btcAddress + "," + solAddress + "," + ethAddress
           );
@@ -38,6 +47,10 @@ function App() {
             item.priceChangeDisplay = item.priceChange[timeFrame];
             item.txnsDisplay = item.txns[timeFrame];
             item.volumeDisplay = item.volume[timeFrame];
+            item.priceDisplay = new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+            }).format(item.priceUsd);
             console.log("priceChangeDisplay:: ", item.priceChangeDisplay);
           }
           setResults(coinList);
@@ -92,17 +105,6 @@ function App() {
     setInfoLoaded(hasLoaded);
   }
 
-  if (!infoLoaded && !results) {
-    <div className="App">
-      <NavigationBar />
-      <header className="App-header">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </header>
-    </div>;
-  }
-
   return (
     <BrowserRouter>
       <div className="App">
@@ -121,11 +123,12 @@ function App() {
             timeFrame={timeFrame}
           />
           <header className="App-header">
-            {alert ? <AlertMessage alert={alert} /> : null}
             {!infoLoaded ? (
               <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
+            ) : infoLoaded && results.length < 1 ? (
+              <span className="visually-hidden">No Results</span>
             ) : (
               <Container>
                 <Stack gap={3} className="col-md-8 mx-auto">
@@ -145,9 +148,9 @@ function App() {
                               <th>Pair</th>
                               <th>Price (USD)</th>
                               <th>Liquidity (USD)</th>
-                              <th>Volume (24h)</th>
-                              <th>Txns (24h)</th>
-                              <th>Price Change (24h)</th>
+                              <th>Volume ({timeFramesObj[timeFrame]})</th>
+                              <th>Txns ({timeFramesObj[timeFrame]})</th>
+                              <th>Price Change ({timeFramesObj[timeFrame]})</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -161,8 +164,11 @@ function App() {
                                   {item.baseToken.symbol}/
                                   {item.quoteToken.symbol}
                                 </td>
-                                <td>{item.priceUsd}</td>
-                                <td>{item.liquidity.usd.toLocaleString()}</td>
+                                <td>{item.priceDisplay}</td>
+                                <td>
+                                  {item.liquidity.usd &&
+                                    item.liquidity.usd.toLocaleString()}
+                                </td>
                                 <td>{item.volumeDisplay.toLocaleString()}</td>
                                 <td>
                                   Buys: {item.txnsDisplay.buys} <br />

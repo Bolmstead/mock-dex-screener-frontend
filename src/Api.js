@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const BASE_URL =`https://mock-dex-screener-backend-983c087ef2ed.herokuapp.com/dex`;
+const BASE_URL = `https://mock-dex-screener-backend-983c087ef2ed.herokuapp.com/dex`;
 
-/** API Class **/ 
+/** API Class **/
 
 class MockDexScreenerAPI {
   // the token for the API will be stored here.
@@ -37,10 +37,9 @@ class MockDexScreenerAPI {
   }
 
   static async search(searchString) {
-    const res = await this.request(`/search?q=${searchString}`);
+    const res = await this.request(`/search/${searchString}`);
     return res;
   }
-
 }
 
 export default MockDexScreenerAPI;
