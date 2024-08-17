@@ -1,0 +1,140 @@
+/* General */
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.soft-gray {
+  color: #575757;
+}
+
+.file-link {
+  color: white;
+  text-decoration: none;
+}
+
+.site-description {
+  margin: 10px;
+  font-size: 16px;
+}
+
+.instructions {
+  font-size: 16px;
+}
+
+.appbar-link {
+  width: 90px;
+  color: #575757;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attachment-icon {
+  font-size: 25px;
+}
+
+/* Titles */
+.page-title {
+  padding: 20px;
+}
+
+.tasks-page-title {
+  margin-top: 10px;
+}
+
+.site-title {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+/* Forms */
+.form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.form-label {
+  font-size: 22px;
+}
+
+.general-form {
+  width: 300px;
+}
+
+.create-task-form {
+  width: 400px;
+}
+
+.account-text {
+  font-size: 16px;
+  text-decoration: none;
+}
+
+/* Alerts */
+.alert-modal {
+  width: 100%;
+}
+
+.alert-icon {
+  font-size: 30px;
+}
+
+/* Task Card */
+.detailed-task-card {
+  width: 100%;
+}
+
+.task-card-body {
+  text-align: left;
+}
+
+.task-card-link {
+  width: 100%;
+  text-decoration: none;
+}
+
+.task-card-title {
+  font-size: 30px;
+}
+
+.task-card-assignees {
+  font-size: 20px;
+}
+
+.task-card-status {
+  font-size: 20px;
+}
+.task-card-description {
+  font-size: 15px;
+}
+
+/* Chat Box */
+.chat-box {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.chat-box-body {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.chat-text {
+  font-size: 16px;
+}
+
+.chat-btn {
+  width: 100px;
+}
