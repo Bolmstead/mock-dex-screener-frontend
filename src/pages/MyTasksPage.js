@@ -6,8 +6,8 @@ import UserContext from "../UserContext.js";
 import TaskCard from "../components/TaskCard.js";
 
 // Only accessible by a client. Displays their assigned tasks
-function MyTasksPage({coins}) {
-  console.log("🚀 ~ MyTasksPage ~ coins:", coins)
+function MyTasksPage({ coins }) {
+  console.log("🚀 ~ MyTasksPage ~ coins:", coins);
   const { setAlert } = useContext(UserContext);
   const [taskComponents, setTaskComponents] = useState([]);
   const [loadingTasks, setLoadingTasks] = useState(true);
@@ -16,10 +16,8 @@ function MyTasksPage({coins}) {
     <Container>
       <Stack gap={3} className="col-md-5 mx-auto">
         <div className="tasks-page-title">
-          <h1>Your Assigned Tasks</h1>
+          <h1>Tokens</h1>
         </div>
-
-
       </Stack>
     </Container>
   );

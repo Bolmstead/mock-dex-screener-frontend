@@ -10,7 +10,7 @@ import MockDexScreenerAPI from "../Api.js";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-function NavigationBar() {
+function NavigationBar({ updateTimeframe, timeFrame }) {
   const { results, updateResults, updateInfoLoaded } = useContext(UserContext);
   const [searchInput, setSearchInput] = useState("");
   const [searching, setSearching] = useState(false);
@@ -62,6 +62,15 @@ function NavigationBar() {
               >
                 {searching ? "Searching..." : "Search"}
               </Button>
+              <Form.Select
+                value={timeFrame}
+                onChange={(e) => updateTimeframe(e.target.value)}
+              >
+                <option value="m5">5M</option>
+                <option value="h1">1H</option>
+                <option value="h6">6H</option>
+                <option value="h24">24H</option>
+              </Form.Select>
             </Nav>
           </Nav>
         </Navbar>

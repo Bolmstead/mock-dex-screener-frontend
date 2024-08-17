@@ -4,7 +4,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1d1d22;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
 
 .appbar-link {
   width: 90px;
-  color: #575757;
+  color: #1d1d22;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -59,29 +59,6 @@
   font-size: 30px;
 }
 
-/* Forms */
-.form-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.form-label {
-  font-size: 22px;
-}
-
-.general-form {
-  width: 300px;
-}
-
-.create-task-form {
-  width: 400px;
-}
-
-.account-text {
-  font-size: 16px;
-  text-decoration: none;
-}
-
 /* Alerts */
 .alert-modal {
   width: 100%;
@@ -89,52 +66,4 @@
 
 .alert-icon {
   font-size: 30px;
-}
-
-/* Task Card */
-.detailed-task-card {
-  width: 100%;
-}
-
-.task-card-body {
-  text-align: left;
-}
-
-.task-card-link {
-  width: 100%;
-  text-decoration: none;
-}
-
-.task-card-title {
-  font-size: 30px;
-}
-
-.task-card-assignees {
-  font-size: 20px;
-}
-
-.task-card-status {
-  font-size: 20px;
-}
-.task-card-description {
-  font-size: 15px;
-}
-
-/* Chat Box */
-.chat-box {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.chat-box-body {
-  max-height: 500px;
-  overflow: auto;
-}
-
-.chat-text {
-  font-size: 16px;
-}
-
-.chat-btn {
-  width: 100px;
 }
